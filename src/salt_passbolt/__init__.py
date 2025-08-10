@@ -49,11 +49,11 @@ def decode_json(data):
     return data["password"]
 
 
-def fetch_passbolt_passwords(group_uuid):
+def fetch_passbolt_passwords(group_uuid, server = "default"):
     """
     Generate Passbolt API object and call API fetch function
     """
-    path = "/etc/salt/passbolt.ini"
+    path = f"/etc/salt/passbolt.d/{server}.ini"
     with passboltapi.PassboltAPI(config_path=path) as passbolt:
         salt = generate_pillar(passbolt, group_uuid)
     return salt
